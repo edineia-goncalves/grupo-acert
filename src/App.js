@@ -1,27 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import Login from './Login';
+import Register from './Register';
+import Home from './Home';
+import History from './components/Helpers';
+import PrivateRoute from './components/PrivateRoute';
+import withFirebaseAuth from 'react-with-firebase-auth'
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import firebaseConfig from './firebaseConfig';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          hello
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Router history={History}>
+          <Switch>
+            <PrivateRoute exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Redirect from="*" to="/" />
+          </Switch>
+        </Router>
+      </div>
+    );
+  }
 }
 
-export default App;
+const firebaseAppAuth = firebaseApp.auth();
+
+const providers = {
+  googleProvider: new firebase.auth.GoogleAuthProvider(),
+};
+
+export default withFirebaseAuth({
+  providers,
+  firebaseAppAuth,
+})(App);
