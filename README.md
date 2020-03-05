@@ -17,6 +17,10 @@ npm install
 
 Para rodar o projeto em modo de desenvolvimento utilize `npm start` na porta [http://localhost:3000](http://localhost:3000) do seu browser.
 
+### VS Code settings
+
+Sugiro a instalação do [settings sync](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync) para sincronizar todas as extensões que foram utilizadas no desenvolvimento do projeto
+
 ### Tecnologias
 
 * [Material ui](https://reactjs.org/)
