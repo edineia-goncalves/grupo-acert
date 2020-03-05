@@ -1,4 +1,4 @@
-# Instalação
+### Instalação
 
 Instalar `node` e `npm` utilize os comandos abaixo:
 ```
