@@ -21,6 +21,10 @@ Para rodar o projeto em modo de desenvolvimento utilize `npm start` na porta [ht
 
 Sugiro a instalação do [settings sync](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync) para sincronizar todas as extensões que foram utilizadas no desenvolvimento do projeto
 
+Após instalar, na página inicial terá opção para logar com sua conta no GitHub abra a barra de comandos ou
+` Ctrl+Shift+P ` e  digite ` sync ` para mostrar todas as opções e selecione 
+` Sync: Update / Upload Settings ` e por último ` Sync: Share Settings with public GIST ` para sincronizar 
+
 ### Tecnologias
 
 * [Material ui](https://reactjs.org/)
