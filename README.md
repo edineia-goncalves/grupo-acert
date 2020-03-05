@@ -16,3 +16,8 @@ npm install
 ### Desenvolvimento
 
 Para rodar o projeto em modo de desenvolvimento utilize `npm start` na porta [http://localhost:3000](http://localhost:3000) do seu browser.
+
+### Tecnologias
+
+* [Material ui](https://reactjs.org/)
+* [Reactjs](https://reactjs.org/)
