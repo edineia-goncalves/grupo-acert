@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import 'typeface-roboto';
 import * as firebase from 'firebase/app';
-import History from './components/Helpers';
+import history from './Helpers/History';
 
 
 class Register extends React.Component {
@@ -32,7 +32,7 @@ class Register extends React.Component {
                         this.state.password)
                     .then((res) => {
                         localStorage.setItem("user", JSON.stringify(this.state))
-                        History.push('/home');
+                        history.push('/home');
                     })
             })
             .catch((error) => {
@@ -87,6 +87,7 @@ class Register extends React.Component {
                         type="submit"
                         variant="contained"
                         color="default"
+                        onClick={this.signInWithGoogle}
                     >
                         Entrar com Google
                 </Button>

@@ -3,7 +3,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import Home from './Home';
-import History from './components/Helpers';
+import history from './Helpers/History';
 import PrivateRoute from './components/PrivateRoute';
 import withFirebaseAuth from 'react-with-firebase-auth'
 import * as firebase from 'firebase/app';
@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Router history={History}>
+        <Router history={history}>
           <Switch>
             <PrivateRoute exact path="/" component={Home} />
             <Route path="/login" component={Login} />

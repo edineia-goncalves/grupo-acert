@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import * as firebase from 'firebase/app';
-import History from './components/Helpers';
+import history from './Helpers/History';
 
 class Home extends React.Component {
     constructor(props) {
@@ -19,8 +19,8 @@ class Home extends React.Component {
     handleSignOut(event) {
         event.preventDefault();
         return firebase.auth().signOut().then(() => {
-            localStorage.setItem("user", '')
-            History.push('/login');
+            localStorage.removeItem("user")
+            history.push('/login');
         }).catch((error) => {
             console.log(error);
         });
