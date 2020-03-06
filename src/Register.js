@@ -4,10 +4,11 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-import 'typeface-roboto';
 import * as firebase from 'firebase/app';
 import history from './Helpers/History';
-
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 class Register extends React.Component {
     constructor(props) {
@@ -18,7 +19,6 @@ class Register extends React.Component {
         this.handleChangePassword = this.handleChangePassword.bind(this);
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
-        this.signInWithGoogle = this.signInWithGoogle.bind(this);
     }
 
     handleRegister(event) {
@@ -31,30 +31,17 @@ class Register extends React.Component {
                         this.state.email,
                         this.state.password)
                     .then((res) => {
-                        localStorage.setItem("user", JSON.stringify(this.state))
+                        const user = {
+                            name: this.state.name,
+                            email: this.state.email
+                        }
+                        localStorage.setItem("user", JSON.stringify(user))
                         history.push('/home');
                     })
             })
             .catch((error) => {
                 console.log(error);
             });
-    }
-
-    signInWithGoogle(event) {
-        event.preventDefault();
-        var provider = new firebase.auth.GoogleAuthProvider();
-
-        firebase.auth().signInWithPopup(provider).then(result => {
-            console.log(result)
-            const user = {
-                name: result && result.user && result.user.displayName,
-                email: result && result.user && result.user.email,
-            }
-            localStorage.setItem("user", JSON.stringify(user))
-            History.push('/home');
-        }).catch(error => {
-            console.log(error)
-        });
     }
 
     handleChangeName(event) {
@@ -70,64 +57,95 @@ class Register extends React.Component {
     }
 
     render() {
-        return <div>
-            <Grid
-                container
-                spacing={0}
-                direction="column"
-                alignItems="center"
-                justify="center"
-                style={{ minHeight: '100vh' }}
-            >
-                <Typography component="h1" variant="h5">
-                    Registrar
-                </Typography>
-                <form onSubmit={this.signInWithGoogle}>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        color="default"
-                        onClick={this.signInWithGoogle}
-                    >
-                        Entrar com Google
-                </Button>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                        value={this.state.name}
-                        onChange={this.handleChangeName}
-                        label="Nome completo"
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                        value={this.state.email}
-                        onChange={this.handleChangeEmail}
-                        label="Email"
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                        value={this.state.senha}
-                        onChange={this.handleChangePassword}
-                        label="Senha"
-                    />
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                    >
-                        Registrar e entrar
-                </Button>
-                </form>
-                <Typography>
-                    <Link to="/login">cancelar</Link>
-                </Typography>
-            </Grid>
-        </div >;
+        const classes = makeStyles(theme => ({
+            paper: {
+                marginTop: theme.spacing(8),
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            },
+            avatar: {
+                margin: theme.spacing(1),
+                backgroundColor: theme.palette.secondary.main,
+            },
+            form: {
+                width: '100%',
+                marginTop: theme.spacing(3),
+            },
+            submit: {
+                margin: theme.spacing(3, 0, 2),
+            },
+        }));
+
+        return (
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Typography component="h1" variant="h5">
+                        Registrar
+                    </Typography>
+                    <form className={classes.form} noValidate>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={12}>
+                                <TextField
+                                    value={this.state.name}
+                                    onChange={this.handleChangeName}
+                                    label="Nome completo"
+                                    autoComplete="name"
+                                    name="name"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="name"
+                                    autoFocus
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Email"
+                                    name="email"
+                                    value={this.state.email}
+                                    onChange={this.handleChangeEmail}
+                                    autoComplete="email"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="Senha"
+                                    type="password"
+                                    id="password"
+                                    value={this.state.senha}
+                                    onChange={this.handleChangePassword}
+                                    autoComplete="current-password"
+                                />
+                            </Grid>
+                        </Grid>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Entrar
+                    </Button>
+                        <Grid container justify="flex-end">
+                            <Grid item>
+                                <Link href="#" variant="body2" to="/login">Já tem uma conta ? Entrar</Link>
+                            </Grid>
+                        </Grid>
+                    </form>
+                </div>
+            </Container>
+        );
     }
 }
 

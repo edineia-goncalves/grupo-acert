@@ -10,8 +10,6 @@ import Container from '@material-ui/core/Container';
 import history from './Helpers/History';
 import * as firebase from 'firebase/app';
 
-
-
 class Login extends React.Component {
 
     constructor(props) {
@@ -137,7 +135,7 @@ class Login extends React.Component {
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2" to="/register">Registrar</Link>
+                                <Link href="#" variant="body2" to="/register">Cadastrar-se</Link>
                             </Grid>
                         </Grid>
                     </form>
