@@ -181,12 +181,8 @@ class Register extends React.Component {
                                     color="primary"
                                     variant="contained"
                                     type="submit"
-                                    disabled={false}
                                 >
-                                    {
-                                        (false && 'Your form is submitted!')
-                                        || (!false && 'Entrar')
-                                    }
+                                    Entrar
                                 </Button>
                             </Grid>
                         </Grid>
