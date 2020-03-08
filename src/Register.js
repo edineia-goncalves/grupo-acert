@@ -1,5 +1,4 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
@@ -9,15 +8,17 @@ import history from './Helpers/History';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 class Register extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { name: '', email: '', password: '' };
+        this.state = { name: '', email: '', password: '', repeatPassword: '' };
 
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
         this.handleChangeName = this.handleChangeName.bind(this);
+        this.handleRepeatPassword = this.handleRepeatPassword.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
     }
 
@@ -56,7 +57,26 @@ class Register extends React.Component {
         this.setState({ password: event.target.value });
     }
 
+    handleRepeatPassword(event) {
+        this.setState({ repeatPassword: event.target.value });
+    }
+
+    componentDidMount() {
+        ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+            if (value !== this.state.password) {
+                return false;
+            }
+            return true;
+        });
+    }
+
+    componentWillUnmount() {
+        ValidatorForm.removeValidationRule('isPasswordMatch');
+    }
+
     render() {
+        const { name, email, password, repeatPassword } = this.state;
+
         const classes = makeStyles(theme => ({
             paper: {
                 marginTop: theme.spacing(8),
@@ -84,11 +104,12 @@ class Register extends React.Component {
                     <Typography component="h1" variant="h5">
                         Registrar
                     </Typography>
-                    <form className={classes.form} noValidate>
+                    <ValidatorForm ref="form" className={classes.form} noValidate onSubmit={this.handleRegister}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={12}>
-                                <TextField
-                                    value={this.state.name}
+                                <p>{this.state.errorName}</p>
+                                <TextValidator
+                                    value={name}
                                     onChange={this.handleChangeName}
                                     label="Nome completo"
                                     autoComplete="name"
@@ -97,24 +118,28 @@ class Register extends React.Component {
                                     required
                                     fullWidth
                                     id="name"
+                                    validators={['required']}
+                                    errorMessages={['Digite o nome']}
                                     autoFocus
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField
+                                <TextValidator
                                     variant="outlined"
                                     required
                                     fullWidth
                                     id="email"
                                     label="Email"
                                     name="email"
-                                    value={this.state.email}
+                                    value={email}
                                     onChange={this.handleChangeEmail}
                                     autoComplete="email"
+                                    validators={['required', 'isEmail']}
+                                    errorMessages={['Digite o email', 'email inválido']}
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField
+                                <TextValidator
                                     variant="outlined"
                                     required
                                     fullWidth
@@ -122,27 +147,48 @@ class Register extends React.Component {
                                     label="Senha"
                                     type="password"
                                     id="password"
-                                    value={this.state.senha}
+                                    value={password}
                                     onChange={this.handleChangePassword}
                                     autoComplete="current-password"
+                                    validators={['required']}
+                                    errorMessages={['Digite uma senha']}
                                 />
                             </Grid>
+                            <Grid item xs={12}>
+                                <TextValidator
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="repeatPassword"
+                                    label="Confirmar senha"
+                                    type="password"
+                                    id="repeatPassword"
+                                    value={repeatPassword}
+                                    onChange={this.handleRepeatPassword}
+                                    validators={['isPasswordMatch', 'required']}
+                                    errorMessages={['senhas não coincidem', 'confirme sua senha']}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Button
+                                    color="primary"
+                                    variant="contained"
+                                    type="submit"
+                                    disabled={false}
+                                >
+                                    {
+                                        (false && 'Your form is submitted!')
+                                        || (!false && 'Entrar')
+                                    }
+                                </Button>
+                            </Grid>
                         </Grid>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                        >
-                            Entrar
-                    </Button>
                         <Grid container justify="flex-end">
                             <Grid item>
                                 <Link href="#" variant="body2" to="/login">Já tem uma conta ? Entrar</Link>
                             </Grid>
                         </Grid>
-                    </form>
+                    </ValidatorForm>
                 </div>
             </Container>
         );
