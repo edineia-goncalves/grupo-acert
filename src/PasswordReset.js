@@ -13,7 +13,7 @@ class PasswordReset extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = { email: '', errorEmail: false };
+        this.state = { email: '', errorEmail: false, isPasswordReset: false };
 
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
         this.passwordResetEmail = this.passwordResetEmail.bind(this);
@@ -24,8 +24,10 @@ class PasswordReset extends React.Component {
         const auth = firebase.auth();
 
         auth.sendPasswordResetEmail(this.state.email).then((res) => {
+            this.setState({ isPasswordReset: !this.state.isPasswordReset });
+            this.setState({ email: '' });
         }).catch(() => {
-            this.setState({ errorEmail: true });
+            this.setState({ errorEmail: !this.state.errorEmail });
         });
     }
 
@@ -40,33 +42,44 @@ class PasswordReset extends React.Component {
             <Dialog aria-labelledby="simple-dialog-title" open={show} onClose={onClose}>
                 <DialogTitle id="simple-dialog-title">Recuperação de senha</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        Insira o endereço de e-mail associado à sua conta
-                    </DialogContentText>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                        id="email"
-                        label="Email"
-                        name="email"
-                        autoComplete="email"
-                        value={this.state.email}
-                        onChange={this.handleChangeEmail}
-                        autoFocus
-                        type="email"
-                        error={this.state.errorEmail}
-                        helperText={this.state.errorEmail ? 'E-mail não encontrado' : ' '}
-                    >
-                    </TextField>
+                    {this.state.isPasswordReset &&
+                        <DialogContentText>
+                            Verifique seu e-mail, clique no link de redefinição de senha e depois
+                            faça login utilizando a sua nova senha
+                        </DialogContentText>
+                    }
+                    {!this.state.isPasswordReset &&
+                        <DialogContentText>
+                            Insira o endereço de e-mail associado à sua conta
+                        </DialogContentText>
+                    }
+                    {!this.state.isPasswordReset &&
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            fullWidth
+                            id="email"
+                            label="Email"
+                            name="email"
+                            autoComplete="email"
+                            value={this.state.email}
+                            onChange={this.handleChangeEmail}
+                            autoFocus
+                            type="email"
+                            error={this.state.errorEmail}
+                            helperText={this.state.errorEmail ? 'E-mail não encontrado' : ' '}
+                        />
+                    }
                 </DialogContent>
                 <DialogActions>
                     <Button size="small" onClick={onClose} color="primary">
-                        Cancelar
+                        {this.state.isPasswordReset ? 'Fechar' : 'Cancelar'}
                     </Button>
-                    <Button size="small" onClick={this.passwordResetEmail} color="primary">
-                        Enviar
+                    {!this.state.isPasswordReset &&
+                        <Button size="small" onClick={this.passwordResetEmail} color="primary">
+                            Enviar
                     </Button>
+                    }
                 </DialogActions>
             </Dialog>
         );
