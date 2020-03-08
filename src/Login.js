@@ -19,7 +19,7 @@ class Login extends React.Component {
 
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
-        this.handleLogin = this.handleLogin.bind(this);
+        this.handleSignIn = this.handleSignIn.bind(this);
         this.signInWithGoogle = this.signInWithGoogle.bind(this);
     }
 
@@ -46,11 +46,18 @@ class Login extends React.Component {
         });
     }
 
-    handleLogin(event) {
+    handleSignIn(event) {
         event.preventDefault();
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-            .then((res) => {
-                return firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
+            .then(() => {
+                return firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(() => {
+                    const user = {
+                        name: this.state.name,
+                        email: this.state.email
+                    }
+                    localStorage.setItem("user", JSON.stringify(user))
+                    history.push('/home');
+                })
             })
             .catch((error) => {
                 console.log(error);
@@ -91,7 +98,7 @@ class Login extends React.Component {
                     <Typography component="h1" variant="h5" >
                         Entrar
                     </Typography>
-                    <ValidatorForm ref="form" className={classes.form} noValidate onSubmit={this.handleLogin}>
+                    <ValidatorForm ref="form" className={classes.form} noValidate onSubmit={this.handleSignIn}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={12}>
                                 <TextValidator
