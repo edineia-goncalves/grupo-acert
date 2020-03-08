@@ -12,7 +12,6 @@ import * as firebase from 'firebase/app';
 class PasswordReset extends React.Component {
 
     constructor(props) {
-        debugger;
         super(props)
         this.state = { email: '', errorEmail: false };
 
@@ -25,13 +24,8 @@ class PasswordReset extends React.Component {
         const auth = firebase.auth();
 
         auth.sendPasswordResetEmail(this.state.email).then((res) => {
-            debugger
-            this.setState({ sendPasswordResetEmail: true });
-            // fechar dialog e mostar msg que o usuário vai receber um e-mail
-        }).catch((error) => {
+        }).catch(() => {
             this.setState({ errorEmail: true });
-            console.log(error)
-            // mostrar erro informando que o e-mail não está não foi encontrado na base
         });
     }
 
@@ -61,8 +55,8 @@ class PasswordReset extends React.Component {
                         onChange={this.handleChangeEmail}
                         autoFocus
                         type="email"
-                        error={this.errorEmail}
-                        helperText={this.errorEmail ? 'E-mail não encontrado' : ' '}
+                        error={this.state.errorEmail}
+                        helperText={this.state.errorEmail ? 'E-mail não encontrado' : ' '}
                     >
                     </TextField>
                 </DialogContent>
