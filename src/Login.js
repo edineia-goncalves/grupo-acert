@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
@@ -9,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import history from './Helpers/History';
 import * as firebase from 'firebase/app';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 class Login extends React.Component {
 
@@ -59,6 +59,8 @@ class Login extends React.Component {
 
 
     render() {
+        const { email, password } = this.state;
+
         const classes = makeStyles(theme => ({
             paper: {
                 marginTop: theme.spacing(8),
@@ -79,66 +81,74 @@ class Login extends React.Component {
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={classes.paper}>
-                    <Typography component="h1" variant="h5">
+                    <Typography component="h1" variant="h5" >
                         Entrar
                     </Typography>
-                    <form className={classes.form} noValidate onSubmit={this.handleLogin}>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email"
-                            name="email"
-                            autoComplete="email"
-                            value={this.state.email}
-                            onChange={this.handleChangeEmail}
-                            autoFocus
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            value={this.state.password}
-                            onChange={this.handleChangePassword}
-                            autoComplete="current-password"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                        >
-                            Entrar
-                        </Button>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="default"
-                            className={classes.submit}
-                            onClick={this.signInWithGoogle}
-                        >
-                            Entrar com Google
-                        </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2">
+                    <ValidatorForm ref="form" className={classes.form} noValidate onSubmit={this.handleLogin}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={12}>
+                                <TextValidator
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Email"
+                                    name="email"
+                                    autoComplete="email"
+                                    value={email}
+                                    onChange={this.handleChangeEmail}
+                                    autoFocus
+                                    validators={['required', 'isEmail']}
+                                    errorMessages={['Digite o email', 'email inválido']}
+                                />
+                                <TextValidator
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                    value={password}
+                                    onChange={this.handleChangePassword}
+                                    validators={['required']}
+                                    errorMessages={['Digite a senha']}
+                                />
+                                <Link href="#" variant="body2" to="/">
                                     Esqueceu a senha
                                 </Link>
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12}>
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.submit}
+                                >
+                                    Entrar
+                            </Button>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    color="default"
+                                    className={classes.submit}
+                                    onClick={this.signInWithGoogle}
+                                >
+                                    Entrar com Google
+                            </Button>
+                            </Grid>
+                            <Grid item xs={12}>
                                 <Link href="#" variant="body2" to="/register">Cadastrar-se</Link>
                             </Grid>
                         </Grid>
-                    </form>
+                    </ValidatorForm>
                 </div>
             </Container>
         );

@@ -90,10 +90,7 @@ class Register extends React.Component {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-            },
-            avatar: {
-                margin: theme.spacing(1),
-                backgroundColor: theme.palette.secondary.main,
+                margin: theme.margin(0),
             },
             form: {
                 width: '100%',
