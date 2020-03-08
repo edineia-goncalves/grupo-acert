@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import * as firebase from 'firebase/app';
-import history from './Helpers/History';
+import history from '../Helpers/History';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import history from './Helpers/History';
+import history from '../Helpers/History';
 import * as firebase from 'firebase/app';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import PasswordReset from './PasswordReset';
