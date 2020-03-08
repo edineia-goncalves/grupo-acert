@@ -24,7 +24,7 @@ Sugiro a instalação do [settings sync](https://marketplace.visualstudio.com/it
 Após instalar, na página inicial terá opção para logar com sua conta no GitHub abra a barra de comandos ou
 ` Ctrl+Shift+P ` e  digite ` sync ` para mostrar todas as opções e selecione 
 ` Sync: Update / Upload Settings ` e por último ` Sync: Share Settings with public GIST ` para sincronizar e utilizar a url: 
-[public gist github](https://gist.github.com/edineia-goncalves/c6b769e91cbc2e77efc5dad59fd4dc21)
+[https://gist.github.com/edineia-goncalves/c6b769e91cbc2e77efc5dad59fd4dc21](https://gist.github.com/edineia-goncalves/c6b769e91cbc2e77efc5dad59fd4dc21)
 
 ### Tecnologias
 
