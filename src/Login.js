@@ -9,17 +9,24 @@ import Container from '@material-ui/core/Container';
 import history from './Helpers/History';
 import * as firebase from 'firebase/app';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import PasswordReset from './PasswordReset';
 
 class Login extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = { email: '', password: '' };
+        this.state = { email: '', password: '', isOpenDialog: false };
 
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
         this.signInWithGoogle = this.signInWithGoogle.bind(this);
+    }
+
+    toggleDialog = () => {
+        this.setState({
+            isOpenDialog: !this.state.isOpenDialog
+        });
     }
 
     signInWithGoogle(event) {
@@ -108,7 +115,7 @@ class Login extends React.Component {
                                     required
                                     fullWidth
                                     name="password"
-                                    label="Password"
+                                    label="Senha"
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
@@ -117,9 +124,10 @@ class Login extends React.Component {
                                     validators={['required']}
                                     errorMessages={['Digite a senha']}
                                 />
-                                <Link href="#" variant="body2" to="/">
+                                <Button href="" color="primary" size="small" onClick={this.toggleDialog}>
                                     Esqueceu a senha
-                                </Link>
+                                </Button>
+                                <PasswordReset show={this.state.isOpenDialog} onClose={this.toggleDialog}></PasswordReset>
                             </Grid>
                             <Grid item xs={12}>
                                 <Button
