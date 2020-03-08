@@ -63,15 +63,22 @@ class Register extends React.Component {
 
     componentDidMount() {
         ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
-            if (value !== this.state.password) {
-                return false;
+            if (value === this.state.password) {
+                return true;
             }
-            return true;
+            return false;
+        });
+        ValidatorForm.addValidationRule('minLength', (value) => {
+            if (value.length >= 6) {
+                return true;
+            }
+            return false;
         });
     }
 
     componentWillUnmount() {
         ValidatorForm.removeValidationRule('isPasswordMatch');
+        ValidatorForm.removeValidationRule('minLength');
     }
 
     render() {
@@ -150,8 +157,8 @@ class Register extends React.Component {
                                     value={password}
                                     onChange={this.handleChangePassword}
                                     autoComplete="current-password"
-                                    validators={['required']}
-                                    errorMessages={['Digite uma senha']}
+                                    validators={['required', 'minLength']}
+                                    errorMessages={['Digite a senha', 'A senha deve conter pelo menos 6 caracteres']}
                                 />
                             </Grid>
                             <Grid item xs={12}>
