@@ -20,7 +20,7 @@ class Artists extends React.Component {
             const list = data.map(artist => {
                 return {
                     name: artist.name,
-                    listeners: artist.listeners,
+                    listeners: `Ouvintes ${artist.listeners}`,
                     url: artist.url,
                     image: Object.values(artist.image[0], "#text")
                 }
