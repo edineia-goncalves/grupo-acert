@@ -28,5 +28,5 @@ Após instalar, na página inicial terá opção para logar com sua conta no Git
 
 ### Tecnologias
 
-* [Material ui](https://reactjs.org/)
+* [Material ui](https://material-ui.com/pt/)
 * [Reactjs](https://reactjs.org/)
