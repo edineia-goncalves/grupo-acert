@@ -28,5 +28,18 @@ Após instalar, na página inicial terá opção para logar com sua conta no Git
 
 ### Tecnologias
 
-* [Material ui](https://reactjs.org/)
+* [Material ui](https://material-ui.com/pt/)
 * [Reactjs](https://reactjs.org/)
+
+### Funcionalidades
+
+- Login de novos usuários com e-mail e senha
+- Login de usuários existentes com e-mail e senha
+- Login de usuários existentes com Google
+- Recuperação de senha por e-mail
+- Persistência do estado do Auth  por sessão: Indica que o estado será mantido somente na sessão ou guia atual
+- Logout
+- Busca por artistas
+- Busca por álbuns dos artistas
+- Salvar resultados de pesquisa de álbuns e artistas do usuário logado
+- Consultar resultado de histórico das pesquisas de álbuns e artistas do usuário logado
