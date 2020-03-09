@@ -37,5 +37,9 @@ Após instalar, na página inicial terá opção para logar com sua conta no Git
 - Login de usuários existentes com e-mail e senha
 - Login de usuários existentes com Google
 - Recuperação de senha por e-mail
-- persistência do estado do Auth  por sessão: Indica que o estado será mantido somente na sessão ou guia atual
+- Persistência do estado do Auth  por sessão: Indica que o estado será mantido somente na sessão ou guia atual
 - Logout
+- Busca por artistas
+- Busca por álbuns dos artistas
+- Salvar resultados de pesquisa de álbuns e artistas do usuário logado
+- Consultar resultado de histórico das pesquisas de álbuns e artistas do usuário logado
