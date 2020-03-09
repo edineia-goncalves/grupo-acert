@@ -30,3 +30,12 @@ Após instalar, na página inicial terá opção para logar com sua conta no Git
 
 * [Material ui](https://material-ui.com/pt/)
 * [Reactjs](https://reactjs.org/)
+
+### Funcionalidades
+
+- Login de novos usuários com e-mail e senha
+- Login de usuários existentes com e-mail e senha
+- Login de usuários existentes com Google
+- Recuperação de senha por e-mail
+- persistência do estado do Auth  por sessão: Indica que o estado será mantido somente na sessão ou guia atual
+- Logout
