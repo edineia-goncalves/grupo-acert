@@ -29,6 +29,7 @@ class NavBar extends React.Component {
     }
 
     render() {
+        const { name, email } = this.state;
         return <div>
             <AppBar position="static" style={{ background: '#2E3B55' }}>
                 <Toolbar>
@@ -38,7 +39,7 @@ class NavBar extends React.Component {
                     >
                         <Grid item>
                             <Typography type="title" color="inherit">
-                                <span>Olá {this.state.name ? this.state.name : this.state.email}</span>
+                                <span>Olá {name ? name : email}</span>
                             </Typography>
                         </Grid>
 
