@@ -3,7 +3,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import Login from './Login/Login';
 import Register from './Login/Register';
-import Home from './Home';
+import Home from './Home/Home';
 import history from './Helpers/History';
 import PrivateRoute from './components/PrivateRoute';
 import withFirebaseAuth from 'react-with-firebase-auth'
