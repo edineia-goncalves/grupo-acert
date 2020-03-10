@@ -26,11 +26,6 @@ Após instalar, na página inicial terá opção para logar com sua conta no Git
 ` Sync: Update / Upload Settings ` e por último ` Sync: Share Settings with public GIST ` para sincronizar e utilizar a url: 
 [https://gist.github.com/edineia-goncalves/c6b769e91cbc2e77efc5dad59fd4dc21](https://gist.github.com/edineia-goncalves/c6b769e91cbc2e77efc5dad59fd4dc21)
 
-### Tecnologias
-
-* [Material ui](https://material-ui.com/pt/)
-* [Reactjs](https://reactjs.org/)
-
 ### Funcionalidades
 
 - Login de novos usuários com e-mail e senha
