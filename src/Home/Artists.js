@@ -22,7 +22,7 @@ class Artists extends React.Component {
                     name: artist.name,
                     listeners: `Ouvintes ${artist.listeners}`,
                     url: artist.url,
-                    image: Object.values(artist.image[0], "#text")
+                    image: Object.values(artist.image[3], "#text")
                 }
             })
             this.setState({

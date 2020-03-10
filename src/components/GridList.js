@@ -27,7 +27,6 @@ export default function BarGridList(props) {
     return (
         <div className={classes.root}>
             <GridList cellHeight={180} className={classes.gridList}>
-
                 {props.data.map(tile => (
                     <GridListTile key={`${tile}-${tile.name}`}>
                         <img src={tile.image[0]} alt={tile.name} />
