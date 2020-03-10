@@ -9,7 +9,7 @@ class MySearch extends React.Component {
     }
 
     componentDidMount() {
-        const listItem = JSON.parse(localStorage.getItem("searchByArtist"));
+        const listItem = JSON.parse(localStorage.getItem("mySearch"));
         this.setState({
             listItem: [...listItem]
         })
