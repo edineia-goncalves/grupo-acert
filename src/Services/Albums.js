@@ -13,10 +13,6 @@ const AlbumService = {
 
         let url = `http://ws.audioscrobbler.com/2.0/?${query}`;
 
-        fetch(url, {
-            method: 'get'
-        })
-
         return fetch(url, { method: "GET" }).then(res => res.json());
     },
 };
