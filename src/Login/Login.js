@@ -15,7 +15,7 @@ class Login extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = { email: '', password: '', isOpenDialog: false };
+        this.state = { email: '', password: '', isOpenDialog: false, error: null };
 
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
@@ -42,7 +42,7 @@ class Login extends React.Component {
             localStorage.setItem("user", JSON.stringify(user))
             history.push('/home');
         }).catch(error => {
-            console.log(error)
+            this.setState({ error: error.message })
         });
     }
 
@@ -60,7 +60,7 @@ class Login extends React.Component {
                 })
             })
             .catch((error) => {
-                console.log(error);
+                this.setState({ error: error.message })
             });
     }
     handleChangeEmail(event) {
@@ -73,7 +73,7 @@ class Login extends React.Component {
 
 
     render() {
-        const { email, password } = this.state;
+        const { email, password, error } = this.state;
 
         const classes = makeStyles(theme => ({
             paper: {
@@ -90,6 +90,10 @@ class Login extends React.Component {
                 margin: theme.spacing(3, 0, 2),
             },
         }));
+
+        const divStyle = {
+            color: 'red',
+        };
 
         return (
             <Container component="main" maxWidth="xs">
@@ -137,6 +141,11 @@ class Login extends React.Component {
                                 <PasswordReset show={this.state.isOpenDialog} onClose={this.toggleDialog}></PasswordReset>
                             </Grid>
                             <Grid item xs={12}>
+                                {error &&
+                                    <span style={divStyle}>{error}</span>
+                                }
+                            </Grid>
+                            <Grid item xs={12}>
                                 <Button
                                     type="submit"
                                     fullWidth
@@ -165,7 +174,7 @@ class Login extends React.Component {
                         </Grid>
                     </ValidatorForm>
                 </div>
-            </Container>
+            </Container >
         );
     }
 }

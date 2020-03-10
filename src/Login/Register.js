@@ -13,7 +13,7 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 class Register extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { name: '', email: '', password: '', repeatPassword: '' };
+        this.state = { name: '', email: '', password: '', repeatPassword: '', error: null };
 
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
@@ -41,7 +41,7 @@ class Register extends React.Component {
                     })
             })
             .catch((error) => {
-                console.log(error);
+                this.setState({ error: error.message })
             });
     }
 
@@ -82,7 +82,7 @@ class Register extends React.Component {
     }
 
     render() {
-        const { name, email, password, repeatPassword } = this.state;
+        const { name, email, password, repeatPassword, error } = this.state;
 
         const classes = makeStyles(theme => ({
             paper: {
@@ -100,6 +100,10 @@ class Register extends React.Component {
                 margin: theme.spacing(3, 0, 2),
             },
         }));
+
+        const divStyle = {
+            color: 'red',
+        }
 
         return (
             <Container component="main" maxWidth="xs">
@@ -172,6 +176,11 @@ class Register extends React.Component {
                                     validators={['isPasswordMatch', 'required']}
                                     errorMessages={['senhas não coincidem', 'confirme sua senha']}
                                 />
+                            </Grid>
+                            <Grid item xs={12}>
+                                {error &&
+                                    <span style={divStyle}>{error}</span>
+                                }
                             </Grid>
                             <Grid item xs={12}>
                                 <Button
