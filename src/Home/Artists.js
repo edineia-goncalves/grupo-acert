@@ -48,7 +48,9 @@ class Artists extends React.Component {
                     handleKeyPress={this.searchArtists}
                 />
                 <React.Fragment>
-                    <BarGridList data={this.state.items}></BarGridList>
+                    {this.state.items &&
+                        <BarGridList data={this.state.items}></BarGridList>
+                    }
                 </React.Fragment>
             </div>
         )

@@ -48,7 +48,9 @@ class Albums extends React.Component {
                     handleKeyPress={this.searchAlbums}
                 />
                 <React.Fragment>
-                    <BarGridList data={this.state.items}></BarGridList>
+                    {this.state.items &&
+                        <BarGridList data={this.state.items}></BarGridList>
+                    }
                 </React.Fragment>
             </div>
         )
