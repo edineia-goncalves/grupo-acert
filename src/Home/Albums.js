@@ -8,10 +8,19 @@ class Albums extends React.Component {
         super(props)
         this.state = { items: [] };
 
+        localStorage.setItem("searchByAlbum", JSON.stringify([]))
         this.searchAlbums = this.searchAlbums.bind(this);
     }
 
+    saveSearch(term) {
+        const storedSearch = JSON.parse(localStorage.getItem("searchByAlbum"));
+        storedSearch.push(term)
+        localStorage.setItem("searchByAlbum", JSON.stringify(storedSearch));
+    }
+
     searchAlbums(term) {
+        this.saveSearch(term);
+
         Api.getByAlbum(term).then(({ results }) => {
             const data = results && results.albummatches && results.albummatches.album
 

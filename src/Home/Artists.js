@@ -7,11 +7,19 @@ class Artists extends React.Component {
     constructor(props) {
         super(props)
         this.state = { items: [] };
-
+        localStorage.setItem("searchByArtist", JSON.stringify([]))
         this.searchArtists = this.searchArtists.bind(this);
     }
 
+    saveSearch(term) {
+        const storedSearch = JSON.parse(localStorage.getItem("searchByArtist"));
+        storedSearch.push(term)
+        localStorage.setItem("searchByArtist", JSON.stringify(storedSearch));
+    }
+
     searchArtists(term) {
+        this.saveSearch(term);
+
         Api.getByArtist(term).then(({ results }) => {
             const data = results && results.artistmatches && results.artistmatches.artist
 
